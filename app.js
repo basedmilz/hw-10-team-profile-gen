@@ -17,57 +17,43 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 console.log(1)
 // function getManager () {
-    inquirer.prompt ([
-        {
+inquirer.prompt([
+    {
         type: 'input',
-        name: 'managerName',
-        message:"Type in manager's name. "
-        },
-        {
-            type: 'input',
-            name: 'managerId',
-            messgae: "Please enter manager's id."
-        },
-        {
-            type:'input',
-            name: 'managerEmail',
-            message:"Please enter manager's email."
-        },
-        {
-            type: 'input',
-            name: 'managersOffice',
-            message: "Please type manager's office number"
-        }
+        name: 'choice',
+        message: "Is the employee a Engineer, Manager or Intern?. "
+    },
+]).then(function (data) {
+    if (data.choice === 'Manager') {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'managerName',
+                message: "What is the manager's name?"
 
-        
 
-    ])
 
-// }
-function getEmployee () {
-    inquirer 
-    .prompt ([
-        {
-        type: 'input',
-        name: 'employeeName',
-        message:"Type in employee's name. "
-        },
-        {
-            type: 'input',
-            name: 'employeeId',
-            messgae: "Please enter employee's id."
-        },
-        {
-            type:'input',
-            name: 'employeeEmail',
-            message:"Please enter employee's email."
-        }
-        
-
-    ])
-
-}
-
+            },
+            {
+                type: 'input',
+                name: 'managerId',
+                message: "What is the manager's id?"
+            },
+            {
+                type: 'input',
+                name: 'managerEmail',
+                message: "What is the manager's email?"
+            },
+            {
+                type: 'input',
+                name: 'officeNumber',
+                message: "What is the manager's office number?"
+            }
+        ]).then(function (getManager) {
+            let choiceManager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
+        })
+    }
+})
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!

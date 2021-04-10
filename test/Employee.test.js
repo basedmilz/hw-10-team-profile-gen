@@ -5,7 +5,7 @@ const Employee = require("../lib/Employee");
 test("Can instantiate Employee instance", () => {
 const newEmployee = new Employee();
 
-expect(obj instanceof Arithmetic).toEqual(true);
+// expect(obj instanceof Arithmetic).toBe(true);
 expect(newEmployee instanceof Employee).toBe(true);
 
 
@@ -16,7 +16,7 @@ test("Can set name via constructor arguments", () => {
     const name = 'Mikey';
     const newEmployee = new Employee(name)
 
-    // expect(obj.number).toEqual(num);
+    // expect(obj.number).toBe(num);
     expect(newEmployee.name).toBe(name)
 
 });
@@ -25,7 +25,7 @@ test("Can set id via constructor argument", () => {
 const id = 1;
 const name = 'Mikey';
 const newEmployee = new Employee(name , id);
-expect(newEmployee.name).toEqual(name, id);
+expect(newEmployee.name).toBe(name, id);
 
 });
 
@@ -35,14 +35,14 @@ const name = 'Mikey';
 const id = 1;
 const newEmployee = new Employee (name, id, email);
 
-expect(newEmployee.email).toEqual(email);
+expect(newEmployee.email).toBe(email);
 });
 
 test("Can get name via getName()", () => {
 const name = 'Mikey';
 const newEmployee = new Employee(name)
 
-expect(newEmployee.getName()).toEqual(name)
+expect(newEmployee.getName()).toBe(name)
 });
 
 test("Can get id via getId()", () => {
@@ -50,7 +50,7 @@ test("Can get id via getId()", () => {
     const name ="Mikey";
     const newEmployee = new Employee(name, id);
     
-expect(newEmployee.getId()).toEqual(name, id)
+expect(newEmployee.getId()).toBe(name, id)
 });
 
 test("Can get email via getEmail()", () => {
@@ -59,7 +59,7 @@ test("Can get email via getEmail()", () => {
     const name = "Mikey";
     const newEmployee = new Employee(name, id, email);
 
-    expect(newEmployee.getEmail()).toEqual(name, id, email)
+    expect(newEmployee.getEmail()).toBe(name, id, email)
 
 });
 
@@ -67,5 +67,5 @@ test("getRole() should return \"Employee\"", () => {
 const role = 'Employee';
 const newEmployee = new Employee(role);
 
-expect(employee.getRole()).toEqual(role);
+expect(employee.getRole()).toBe(role);
 });

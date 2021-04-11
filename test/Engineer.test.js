@@ -3,7 +3,7 @@
 const Engineer = require("../lib/Engineer");
 
 test("Can set GitHUb account via constructor", () => {
-
+const 
 });
 
 test("getRole() should return \"Engineer\"", () => {

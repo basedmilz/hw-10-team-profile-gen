@@ -11,12 +11,19 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+function renderHtml(HTML) {
+    fs.writeFileSync (outputpath, HTML, err => {
+        if (err) {
+            return console.log(err)
+        }
+    })
+}
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 console.log(1)
 // function getManager () {
+const final = []
 inquirer.prompt([
     {
         type: 'input',
@@ -51,7 +58,71 @@ inquirer.prompt([
             }
         ]).then(function (getManager) {
             let choiceManager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
-        })
+            final.push(choiceManager)
+        }).then
+        (renderHtml())
+    }
+
+    if (data.choice === 'Engineer') {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'engineerName',
+                message: "What is the employee's name?"
+
+
+
+            },
+            {
+                type: 'input',
+                name: 'engineerId',
+                message: "What is the employee's id?"
+            },
+            {
+                type: 'input',
+                name: 'engineerEmail',
+                message: "What is the engineer's email?"
+            },
+            {
+                type: 'input',
+                name: 'gitEngine',
+                message: "What is the engineer's github?"
+            }
+        ]).then(function (getEngineer) {
+            let choiceEngineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.gitEngine)
+            console.log(data)
+            final.push(getEngineer)
+        }).then(renderHtml())
+    }
+    if (data.choice === 'Intern') {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'internName',
+                message: "What is the intern's name?"
+
+
+
+            },
+            {
+                type: 'input',
+                name: 'internId',
+                message: "What is the intern's id?"
+            },
+            {
+                type: 'input',
+                name: 'internEmail',
+                message: "What is the intern's email?"
+            },
+            {
+                type: 'input',
+                name: 'internSchool',
+                message: "What is the intern's school?"
+            }
+        ]).then(function (getIntern) {
+            let choiceIntern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+            final.push(choiceIntern)
+        }).then(renderHtml())
     }
 })
 // After the user has input all employees desired, call the `render` function (required

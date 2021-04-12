@@ -11,13 +11,13 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-function renderHtml(HTML) {
-    fs.writeFileSync (outputpath, HTML, err => {
-        if (err) {
-            return console.log(err)
-        }
-    })
-}
+// function renderHtml(HTML) {
+//     fs.writeFile (outputPath, render(final), err => {
+//         if (err) {
+//             return console.log(err)
+//         }
+//     })
+// }
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -35,7 +35,7 @@ inquirer.prompt([
         inquirer.prompt([
             {
                 type: 'input',
-                name: 'managerName',
+                name: 'name',
                 message: "What is the manager's name?"
 
 
@@ -43,12 +43,12 @@ inquirer.prompt([
             },
             {
                 type: 'input',
-                name: 'managerId',
+                name: 'id',
                 message: "What is the manager's id?"
             },
             {
                 type: 'input',
-                name: 'managerEmail',
+                name: 'email',
                 message: "What is the manager's email?"
             },
             {
@@ -57,17 +57,21 @@ inquirer.prompt([
                 message: "What is the manager's office number?"
             }
         ]).then(function (getManager) {
-            let choiceManager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber)
+            let choiceManager = new Manager(data.name, data.id, data.email, data.officeNumber)
             final.push(choiceManager)
         }).then
-        (renderHtml())
+        (fs.writeFile (outputPath, render(final), err => {
+            if (err) {
+                return console.log(err)
+            }
+        }))
     }
 
     if (data.choice === 'Engineer') {
         inquirer.prompt([
             {
                 type: 'input',
-                name: 'engineerName',
+                name: 'name',
                 message: "What is the employee's name?"
 
 
@@ -75,30 +79,34 @@ inquirer.prompt([
             },
             {
                 type: 'input',
-                name: 'engineerId',
+                name: 'id',
                 message: "What is the employee's id?"
             },
             {
                 type: 'input',
-                name: 'engineerEmail',
+                name: 'email',
                 message: "What is the engineer's email?"
             },
             {
                 type: 'input',
-                name: 'gitEngine',
+                name: 'github',
                 message: "What is the engineer's github?"
             }
         ]).then(function (getEngineer) {
-            let choiceEngineer = new Engineer(data.engineerName, data.engineerId, data.engineerEmail, data.gitEngine)
+            let choiceEngineer = new Engineer(data.name, data.id, data.email, data.github)
             console.log(data)
             final.push(getEngineer)
-        }).then(renderHtml())
+        }).then(fs.writeFile (outputPath, render(final), err => {
+            if (err) {
+                return console.log(err)
+            }
+        }))
     }
     if (data.choice === 'Intern') {
         inquirer.prompt([
             {
                 type: 'input',
-                name: 'internName',
+                name: 'name',
                 message: "What is the intern's name?"
 
 
@@ -106,23 +114,27 @@ inquirer.prompt([
             },
             {
                 type: 'input',
-                name: 'internId',
+                name: 'id',
                 message: "What is the intern's id?"
             },
             {
                 type: 'input',
-                name: 'internEmail',
+                name: 'email',
                 message: "What is the intern's email?"
             },
             {
                 type: 'input',
-                name: 'internSchool',
+                name: 'school',
                 message: "What is the intern's school?"
             }
         ]).then(function (getIntern) {
-            let choiceIntern = new Intern(data.internName, data.internId, data.internEmail, data.internSchool)
+            let choiceIntern = new Intern(data.name, data.id, data.email, data.school)
             final.push(choiceIntern)
-        }).then(renderHtml())
+        }).then(fs.writeFile (outputPath, render(final), err => {
+            if (err) {
+                return console.log(err)
+            }
+        }))
     }
 })
 // After the user has input all employees desired, call the `render` function (required

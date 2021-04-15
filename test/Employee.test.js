@@ -6,13 +6,13 @@ test("Can instantiate Employee instance", () => {
 const newEmployee = new Employee();
 
 // expect(obj instanceof Arithmetic).toBe(true);
-expect(newEmployee instanceof Employee).toBe(true);
+expect(newEmployee instanceof Employee).toEqual(true);
 
 
 });
 
 test("Can set name via constructor arguments", () => {
-    expect(newEmployee instanceof Employee).toBe(true);
+   
     const name = 'Mikey';
     const newEmployee = new Employee(name)
 
@@ -22,20 +22,19 @@ test("Can set name via constructor arguments", () => {
 });
 
 test("Can set id via constructor argument", () => {
-const id = 1;
-const name = 'Mikey';
-const newEmployee = new Employee(name , id);
-expect(newEmployee.name).toBe(name, id);
+const newId = 1;
+
+const newEmployee = new Employee(1 , newId);
+expect(newEmployee.id).toBe(newId);
 
 });
 
 test("Can set email via constructor argument", () => {
-const email = 'Mikey@empEmail.com';
+const newEmail = 'Mikey@gmailll.com';
 const name = 'Mikey';
-const id = 1;
-const newEmployee = new Employee (name, id, email);
+const newEmployee = new Employee (newEmail);
 
-expect(newEmployee.email).toBe(email);
+expect(newEmployee.email).toBe(newEmail);
 });
 
 test("Can get name via getName()", () => {
@@ -47,25 +46,24 @@ expect(newEmployee.getName()).toBe(name)
 
 test("Can get id via getId()", () => {
     const id =1;
-    const name ="Mikey";
-    const newEmployee = new Employee(name, id);
+
+    const newEmployee = new Employee(id);
     
-expect(newEmployee.getId()).toBe(name, id)
+expect(newEmployee.getId()).toBe(id);
 });
 
 test("Can get email via getEmail()", () => {
-    const email = 'Mikey@empEmail.com';
-    const id = 1;
-    const name = "Mikey";
-    const newEmployee = new Employee(name, id, email);
+    const mEmail = 'Mikey@ggmail.com';
+    
+    const newEmployee = new Employee('Mikey', mEmail);
 
-    expect(newEmployee.getEmail()).toBe(name, id, email)
+    expect(newEmployee.getEmail()).toBe(mEmail);
 
 });
 
 test("getRole() should return \"Employee\"", () => {
-const role = 'Employee';
-const newEmployee = new Employee(role);
+const newRole = 'Employee';
+const newEmployee = new Employee('Mikey', 1, '');
 
-expect(employee.getRole()).toBe(role);
+expect(employee.getRole()).toBe(newRole);
 });

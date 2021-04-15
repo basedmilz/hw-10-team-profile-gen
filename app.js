@@ -24,119 +24,164 @@ const render = require("./lib/htmlRenderer");
 console.log(1)
 // function getManager () {
 const final = []
-inquirer.prompt([
-    {
-        type: 'input',
-        name: 'choice',
-        message: "Is the employee a Engineer, Manager or Intern?. "
-    },
-]).then(function (data) {
-    if (data.choice === 'Manager') {
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: "What is the manager's name?"
+
+const startPrompt = () => {
+
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'choice',
+            message: "Is the employee a Engineer, Manager or Intern?. ",
+            choices: ["Engineer", "Manager", "Intern", "None"]
+        },
+    ]).then(function (data) {
+        console.log(data)
+        if (data.choice === 'Manager') {
+            ManagerInput()
+        }
+
+        if (data.choice === 'Engineer') {
+            getEngineer()
+        }
+        if (data.choice === 'Intern') {
+            getIntern()
+        }
+        if (data.choice === 'None') {
+
+            conCat()
+        }
+    })
+}
+const conCat = () => {
+    console.log(final)
+    fs.writeFile(outputPath, render(final), err => {
+        if (err) {
+            return console.log(err)
+        }
+    })
+}
+
+const ManagerInput = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the manager's name?"
 
 
 
-            },
-            {
-                type: 'input',
-                name: 'id',
-                message: "What is the manager's id?"
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: "What is the manager's email?"
-            },
-            {
-                type: 'input',
-                name: 'officeNumber',
-                message: "What is the manager's office number?"
-            }
-        ]).then(function (getManager) {
-            let choiceManager = new Manager(data.name, data.id, data.email, data.officeNumber)
-            final.push(choiceManager)
-        }).then
-        (fs.writeFile (outputPath, render(final), err => {
-            if (err) {
-                return console.log(err)
-            }
-        }))
-    }
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the manager's id?"
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the manager's email?"
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: "What is the manager's office number?"
+        }
+    ]).then(function (data) {
+        let choiceManager = new Manager(data.name, data.id, data.email, data.officeNumber)
+        final.push(choiceManager)
+        startPrompt()
+    })
 
-    if (data.choice === 'Engineer') {
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: "What is the employee's name?"
+    // }).then
+    //     (fs.writeFile(outputPath, render(final), err => {
+    //         if (err) {
+    //             return console.log(err)
+    //         }
+    //     }))
 
 
 
-            },
-            {
-                type: 'input',
-                name: 'id',
-                message: "What is the employee's id?"
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: "What is the engineer's email?"
-            },
-            {
-                type: 'input',
-                name: 'github',
-                message: "What is the engineer's github?"
-            }
-        ]).then(function (getEngineer) {
-            let choiceEngineer = new Engineer(data.name, data.id, data.email, data.github)
-            console.log(data)
-            final.push(getEngineer)
-        }).then(fs.writeFile (outputPath, render(final), err => {
-            if (err) {
-                return console.log(err)
-            }
-        }))
-    }
-    if (data.choice === 'Intern') {
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: "What is the intern's name?"
+}
+
+const getIntern = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the intern's name?"
 
 
 
-            },
-            {
-                type: 'input',
-                name: 'id',
-                message: "What is the intern's id?"
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: "What is the intern's email?"
-            },
-            {
-                type: 'input',
-                name: 'school',
-                message: "What is the intern's school?"
-            }
-        ]).then(function (getIntern) {
-            let choiceIntern = new Intern(data.name, data.id, data.email, data.school)
-            final.push(choiceIntern)
-        }).then(fs.writeFile (outputPath, render(final), err => {
-            if (err) {
-                return console.log(err)
-            }
-        }))
-    }
-})
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the intern's id?"
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the intern's email?"
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "What is the intern's school?"
+        }
+    ]).then(function (data) {
+        let choiceIntern = new Intern(data.name, data.id, data.email, data.school)
+        final.push(choiceIntern)
+        startPrompt()
+    })
+    // }).then(fs.writeFile(outputPath, render(final), err => {
+    //     if (err) {
+    //         return console.log(err)
+    //     }
+    // }))
+}
+
+const getEngineer = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the employee's name?"
+
+
+
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the employee's id?"
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the engineer's email?"
+        },
+        {
+            type: 'input',
+            name: 'github',
+            message: "What is the engineer's github?"
+        }
+    ]).then(function (data) {
+        let choiceEngineer = new Engineer(data.name, data.id, data.email, data.github)
+        console.log(data)
+        final.push(choiceEngineer)
+        startPrompt()
+    })
+    // .then(fs.writeFile(outputPath, render(final), err => {
+    // //     if (err) {
+    // //         return console.log(err)
+    // //     }
+    // // }))
+}
+startPrompt()
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
